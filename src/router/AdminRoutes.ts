@@ -17,7 +17,22 @@ const AdminRoutes: Array<any> = [
             {
                 path: `${prefix}profile/index`,
                 name: 'AdminProfile',
-                component: () => import("@/views/admin/DashboardIndex.vue"),
+                component: () => import("@/views/admin/profile/ProfileIndex.vue"),
+            },
+            {
+                path: `${prefix}siswa/index`,
+                name: 'AdminSiswa',
+                component: () => import("@/views/admin/siswa/SiswaIndex.vue"),
+            },
+            {
+                path: `${prefix}absensi/index`,
+                name: 'AdminAbsensi',
+                component: () => import("@/views/admin/absensi/AbsensiIndex.vue"),
+            },
+            {
+                path: `${prefix}rekap/index`,
+                name: 'AdminRekap',
+                component: () => import("@/views/admin/rekap/RekapIndex.vue"),
             },
         ],
     },
