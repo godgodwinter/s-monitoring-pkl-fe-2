@@ -13,7 +13,7 @@ const doLogin = async (email: string, password: string): Promise<boolean | undef
         });
 
         let token = response.data.token;
-        console.log(token);
+        // console.log(token);
         if (token) {
             localStorage.setItem("token", token);
             localStorage.setItem("isLogin", true);
@@ -39,9 +39,12 @@ const doLogin = async (email: string, password: string): Promise<boolean | undef
 
 const doCheckToken = async (token: string): Promise<boolean | undefined> => {
     try {
+        // console.log(token);
+
         const response = await Api.post(`pembimbinglapangan/auth/refresh`, {
             token: token
         });
+        console.log(response);
         // console.log(response.hasOwnProperty("data"));
         if (response.hasOwnProperty("data")) {
             let newToken = response.data.token;

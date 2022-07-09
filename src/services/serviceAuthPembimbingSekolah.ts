@@ -1,7 +1,7 @@
-import { useStoreAdminAuth } from '@/stores/adminAuth';
-import Api from "@/axios/axios";
+import { useStoreAdminAuthPembimbingSekolah } from '@/stores/adminAuthPembimbingSekolah';
+import Api from "@/axios/axiosPembimbingSekolah";
 import Toast from "@/components/lib/Toast"
-const storeAdminAuth = useStoreAdminAuth();
+const storeAdminAuthPembimbingSekolah = useStoreAdminAuthPembimbingSekolah();
 
 // const dataAsli = computed(() => storeAdminAuth.getData);
 
@@ -13,12 +13,12 @@ const doLogin = async (email: string, password: string): Promise<boolean | undef
         });
 
         let token = response.data.token;
-        console.log(token);
+        // console.log(token);
         if (token) {
             localStorage.setItem("tokenPembimbingSekolah", token);
             localStorage.setItem("isLoginPembimbingSekolah", true);
-            storeAdminAuth.setToken(token);
-            storeAdminAuth.setIsLogin(true);
+            storeAdminAuthPembimbingSekolah.setToken(token);
+            storeAdminAuthPembimbingSekolah.setIsLogin(true);
             // console.log("login berhasil");
             // console.log(response.message);
             Toast.success("Info", "Login berhasil!");
@@ -39,6 +39,8 @@ const doLogin = async (email: string, password: string): Promise<boolean | undef
 
 const doCheckToken = async (token: string): Promise<boolean | undefined> => {
     try {
+        // console.log(token);
+
         const response = await Api.post(`pembimbingsekolah/auth/refresh`, {
             token: token
         });
@@ -46,13 +48,13 @@ const doCheckToken = async (token: string): Promise<boolean | undefined> => {
         if (response.hasOwnProperty("data")) {
             let newToken = response.data.token;
             localStorage.setItem("tokenPembimbingSekolah", newToken);
-            storeAdminAuth.setToken(newToken);
+            storeAdminAuthPembimbingSekolah.setToken(newToken);
 
             // let dataMe = {
             //     id: response.data.me.id,
             //     name: response.data.me.name,
             // };
-            // storeAdminAuth.setMe(dataMe);
+            // storeAdminAuthPembimbingSekolah.setMe(dataMe);
             // console.log(dataMe);
 
             return true;
@@ -70,8 +72,8 @@ const doLogout = async (alert: boolean = true): Promise<boolean | undefined> => 
     try {
         localStorage.removeItem("tokenPembimbingSekolah");
         localStorage.removeItem("isLoginPembimbingSekolah");
-        storeAdminAuth.setToken("");
-        storeAdminAuth.setIsLogin(false);
+        storeAdminAuthPembimbingSekolah.setToken("");
+        storeAdminAuthPembimbingSekolah.setIsLogin(false);
         if (alert) {
             Toast.success("Info", "Logout berhasil!");
         }

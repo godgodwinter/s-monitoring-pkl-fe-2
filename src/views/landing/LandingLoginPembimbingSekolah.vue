@@ -13,10 +13,12 @@ const isLogin = computed(() => storeAdminAuthPembimbingSekolah.getIsLogin);
 
 const resCheckToken: Ref<Promise<boolean>> = ref([]);
 const checkTokenExpired = async (dataToken: string): Promise<void> => {
-  resCheckToken.value = await serviceAuth.doCheckToken(dataToken);
+  resCheckToken.value = await serviceAuthPembimbingSekolah.doCheckToken(
+    dataToken
+  );
   if (resCheckToken.value == true) {
     Toast.info("Info", "Login berhasil");
-    router.push({ name: "AdminDashboard" });
+    router.push({ name: "PembimbingSekolahDashboardLayout" });
   }
 };
 
@@ -36,7 +38,7 @@ const onSubmit = async (values: any) => {
     values.password
   );
   if (resLogin.value) {
-    router.push({ name: "AdminDashboard" });
+    router.push({ name: "PembimbingSekolahDashboard" });
   }
 };
 </script>

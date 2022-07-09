@@ -58,7 +58,15 @@ const columns = [
 
   <div class="py-10">
     <div>
-      <div>Pilih Tanggal <button class="btn btn-primary">PIlih</button></div>
+      <div>
+        <select class="select select-bordered w-full max-w-xs">
+          <option disabled selected>Pilih Bulan ?</option>
+          <option>Paijo</option>
+          <option>Jokowi</option>
+          <option>Sri</option>
+        </select>
+        <button class="btn btn-primary">PIlih</button>
+      </div>
     </div>
   </div>
 
