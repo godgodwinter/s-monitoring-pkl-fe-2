@@ -8,7 +8,7 @@ const AuthRoutes = [
             {
                 path: '/',
                 name: 'LandingIndex',
-                component: () => import("@/views/landing/LandingLogin.vue"),
+                component: () => import("@/views/landing/LandingIndex.vue"),
             },
             {
                 path: '/login',
@@ -18,7 +18,7 @@ const AuthRoutes = [
             {
                 path: '/login/pembimbingsekolah',
                 name: 'LandingLoginPembimbingSekolah',
-                component: () => import("@/views/landing/LandingLogin.vue"),
+                component: () => import("@/views/landing/LandingLoginPembimbingSekolah.vue"),
             },
         ],
     },

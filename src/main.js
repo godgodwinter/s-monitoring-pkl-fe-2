@@ -8,6 +8,9 @@ import "./index.css";
 // library fixed
 import VueGoodTablePlugin from "vue-good-table-next";
 
+//style
+import "vue-good-table-next/dist/vue-good-table-next.css";
+
 const app = createApp(App);
 
 // style
