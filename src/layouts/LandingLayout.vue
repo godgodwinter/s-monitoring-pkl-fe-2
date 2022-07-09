@@ -7,7 +7,7 @@ import ScrollToTop from "@/components/template/ScrollToTop.vue";
 <template>
   <!-- <ScrollToTop /> -->
   <!-- <ThemeBar /> -->
-  <div class="border-b-2 top-10 lg:top-0 relative">
+  <div class="border-b-2 top-0 lg:top-0 relative">
     <div class="drawer">
       <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
       <div class="drawer-content flex flex-col">

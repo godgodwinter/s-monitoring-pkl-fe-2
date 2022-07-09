@@ -28,7 +28,7 @@ const checkTokenExpired = async (dataToken: string): Promise<void> => {
 // console.log(token.value);
 
 if (token.value) {
-  console.log("isTokenExpired");
+  // console.log("isTokenExpired");
   checkTokenExpired(token.value);
 } else {
   Toast.info("Info", "Silahkan login terlebih dahulu");
