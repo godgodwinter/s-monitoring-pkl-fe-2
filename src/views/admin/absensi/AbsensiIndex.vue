@@ -5,6 +5,8 @@ import { useStoreAdmin } from "@/stores/admin";
 import Api from "@/axios/axios";
 import moment from "moment/min/moment-with-locales";
 import localization from "moment/locale/id";
+import { Field, Form } from "vee-validate";
+import fnValidasi from "@/components/lib/babengValidasi";
 
 const storeAdmin = useStoreAdmin();
 storeAdmin.setPagesActive("absensi");
@@ -106,10 +108,19 @@ const getDataAbsensi = async (siswaId, monthyear) => {
     // data.value = res.siswa;
     dataAbsensi.value = await ApiAbsensi.getData(siswaId, monthyear);
     data.value = dataAbsensi.value;
-    console.log(siswaId, monthyear, dataAbsensi.value);
+    // console.log(siswaId, monthyear, dataAbsensi.value);
   } catch (error) {
     console.log(error);
   }
+};
+
+const doKonfirmasiKehadiran = async (tanggal) => {
+  let siswaId = selectedSiswa.value;
+  console.log(siswaId, tanggal);
+};
+const doKonfirmasiJurnal = async (tanggal) => {
+  let siswaId = selectedSiswa.value;
+  console.log(siswaId, tanggal);
 };
 </script>
 <template>
@@ -213,7 +224,10 @@ const getDataAbsensi = async (siswaId, monthyear) => {
                     {{ props.row.kehadiran ? props.row.kehadiran : "-" }}
                   </div>
                   <div>
-                    <button class="btn btn-primary btn-sm">
+                    <label
+                      :for="'my-modal-absen' + props.row.id"
+                      class="btn btn-primary modal-button font-medium rounded-lg text-sm"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="h-5 w-5"
@@ -226,16 +240,111 @@ const getDataAbsensi = async (siswaId, monthyear) => {
                           clip-rule="evenodd"
                         />
                       </svg>
-                    </button>
-                  </div></div
-              ></span>
+                    </label>
+                    <!-- Put this part before </body> tag -->
+                    <input
+                      type="checkbox"
+                      :id="'my-modal-absen' + props.row.id"
+                      class="modal-toggle"
+                    />
+                    <label
+                      :for="'my-modal-absen' + props.row.id"
+                      class="modal cursor-pointer"
+                    >
+                      <label class="modal-box w-11/12 max-w-xl relative" for="">
+                        <h3 class="text-lg font-bold text-center">
+                          Kehadiran tanggal {{ props.row.tanggal }}
+                        </h3>
+
+                        <Form v-slot="{ errors }" @submit="onSubmitAbsensi">
+                          <div class="px-10">
+                            <div
+                              class="py-4 space-x-2 space-y-2 flex flex-wrap w-full justify-center"
+                            >
+                              <div class="w-full py-2">
+                                <label for="">Konfirmasi:</label>
+                                <Field
+                                  :rules="fnValidasi.validateData2"
+                                  v-model="dataForm.label"
+                                  name="label"
+                                  class="select select-bordered w-11/12"
+                                  as="select"
+                                >
+                                  <option disabled selected>Pilih ?</option>
+                                  <option value="Disetujui">Disetujui</option>
+                                  <option value="Ditolak">Ditolak</option>
+                                </Field>
+
+                                <div class="text-xs text-red-600 mt-1">
+                                  {{ errors.label }}
+                                </div>
+                              </div>
+
+                              <div
+                                class="w-full"
+                                v-if="
+                                  dataForm.label &&
+                                  dataForm.label != 'Disetujui'
+                                "
+                              >
+                                <label for="file" class>Catatan : </label>
+
+                                <Field
+                                  :rules="fnValidasi.validateData2"
+                                  v-model="dataForm.alasan"
+                                  v-slot="{ field }"
+                                  name="alasan"
+                                  type="text"
+                                  class="input input-bordered w-11/12"
+                                >
+                                  <textarea
+                                    v-bind="field"
+                                    class="textarea textarea-bordered w-11/12 h-24"
+                                    placeholder="Catatan"
+                                  ></textarea>
+                                </Field>
+                                <div class="text-xs text-red-600 mt-1">
+                                  {{ errors.alasan }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="w-full flex justify-end">
+                              <button class="btn btn-primary">Simpan</button>
+                            </div>
+                          </div>
+                        </Form>
+                      </label>
+                    </label>
+                    <!-- <button
+                      class="btn btn-primary btn-sm"
+                      @click="doKonfirmasiKehadiran(props.row.tanggal)"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </button> -->
+                  </div>
+                </div></span
+              >
               <span v-else-if="props.column.field == 'jurnal'">
                 <div class="flex justify-between px-6">
                   <div>
                     {{ props.row.jurnal ? props.row.jurnal : "-" }}
                   </div>
                   <div>
-                    <button class="btn btn-warning btn-sm">
+                    <button
+                      class="btn btn-warning btn-sm"
+                      @click="doKonfirmasiJurnal(props.row.tanggal)"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         class="h-5 w-5"
