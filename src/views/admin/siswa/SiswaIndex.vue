@@ -1,10 +1,30 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useStoreAdmin } from "@/stores/admin";
-
+import Api from "@/axios/axios";
 const storeAdmin = useStoreAdmin();
 storeAdmin.setPagesActive("siswa");
 const data = ref([]);
+
+const tempatPKl = ref([]);
+const pembimbinglapangan = ref([]);
+const pembimbingsekolah = ref([]);
+const siswa = ref([]);
+const getData = async () => {
+  try {
+    const response = await Api.get("/pembimbinglapangan/profile/get");
+    let res = response.data;
+    data.value = res.siswa;
+    tempatPKl.value = res.tempatpkl;
+    pembimbinglapangan.value = res.pembimbinglapangan;
+    pembimbingsekolah.value = res.pembimbingsekolah;
+    siswa.value = res.siswa;
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+getData();
 
 let dataExample = [
   {
@@ -27,7 +47,7 @@ let dataExample = [
   },
 ];
 
-data.value = dataExample;
+// data.value = dataExample;
 const columns = [
   {
     label: "NIS",
@@ -57,7 +77,7 @@ const columns = [
 <template>
   <div class="space-y-2">
     <h1 class="text-2xl font-bold">Siswa</h1>
-    <p class="text-sm">Jumlah 4 Siswa</p>
+    <p class="text-sm">Jumlah {{ data.length }} Siswa</p>
   </div>
 
   <div class="md:py-2 px-4 lg:flex flex-wrap gap-4">
