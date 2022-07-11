@@ -44,7 +44,7 @@ const doCheckToken = async (token: string): Promise<boolean | undefined> => {
         const response = await Api.post(`pembimbinglapangan/auth/refresh`, {
             token: token
         });
-        console.log(response);
+        // console.log(response);
         // console.log(response.hasOwnProperty("data"));
         if (response.hasOwnProperty("data")) {
             let newToken = response.data.token;

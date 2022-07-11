@@ -152,7 +152,7 @@ const doLogout = async (): Promise<void> => {
               clip-rule="evenodd"
             />
           </svg>
-          <span class="ml-3">Absensi </span></router-link
+          <span class="ml-3">Absensi & Jurnal</span></router-link
         >
       </li>
       <!-- <li :class="[pagesActive == 'jurnal' ? pagesActiveClass : '']">
