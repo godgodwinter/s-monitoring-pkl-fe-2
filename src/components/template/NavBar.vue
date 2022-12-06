@@ -7,27 +7,6 @@
     >
   </li>
   <li>
-    <router-link :to="{ name: 'LandingIndex' }">
-      <span class="text-base-content font-normal text-sm hover:link"
-        >SISWA</span
-      ></router-link
-    >
-  </li>
-  <li>
-    <router-link :to="{ name: 'LandingLogin' }">
-      <span class="text-base-content font-normal text-sm hover:link"
-        >PEMBIMBING LAPANGAN</span
-      ></router-link
-    >
-  </li>
-  <li>
-    <router-link :to="{ name: 'LandingLoginPembimbingSekolah' }">
-      <span class="text-base-content font-normal text-sm hover:link"
-        >PEMBIMBING SEKOLAH</span
-      ></router-link
-    >
-  </li>
-  <!-- <li>
     <router-link :to="{ name: 'LandingProfile' }">
       <span class="text-base-content font-normal text-sm hover:link"
         >Profile</span
@@ -61,5 +40,5 @@
         >Login</span
       ></router-link
     >
-  </li> -->
+  </li>
 </template>

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { defineStore } from "pinia";
 
 export const useStoreAdminAuth = defineStore({
@@ -11,14 +12,22 @@ export const useStoreAdminAuth = defineStore({
       id: 0,
       name: "",
     },
+    kepalajurusan: false,
+    penilai: false,
+    jurusan: [],
+    tempatpkl: null,
   }),
   getters: {
     getToken: (state) => state.token,
     getIsLogin: (state) => state.isLogin,
     getMe: (state) => state.me,
+    getKepalaJurusan: (state) => state.kepalajurusan,
+    getPenilai: (state) => state.penilai,
+    getJurusan: (state) => state.jurusan,
+    getTempatpkl: (state) => state.tempatpkl,
   },
   actions: {
-    setToken(token) {
+    setToken(tokeng) {
       this.token = token;
     },
     setIsLogin(isLogin) {
@@ -26,6 +35,18 @@ export const useStoreAdminAuth = defineStore({
     },
     setMe(me) {
       this.me = me;
+    },
+    setKepalaJurusan(kepalajurusan) {
+      this.kepalajurusan = kepalajurusan;
+    },
+    setPenilai(penilai) {
+      this.penilai = penilai;
+    },
+    setJurusan(jurusan) {
+      this.jurusan = jurusan;
+    },
+    setTempatpkl(tempatpkl) {
+      this.tempatpkl = tempatpkl;
     },
   },
 });
