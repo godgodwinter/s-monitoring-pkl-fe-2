@@ -56,7 +56,7 @@ const dataAsli = ref([]);
 const data = ref([]);
 const getData = async () => {
     try {
-        const response = await Api.get(`guru/dataku/penilai/siswa`);
+        const response = await Api.get(`pembimbinglapangan/dataku/siswa`);
         dataAsli.value = response.data;
         data.value = response.data;
 

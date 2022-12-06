@@ -115,13 +115,28 @@ const AdminRoutes = [
               title: "Profile",
               icon: "mdi-home",
               breadcrumb: {
-                name: "Detail Nilai",
+                name: "Profile",
                 path: `${prefix}/siswadetail/:id`,
                 goto: `${prefixName}siswadetail-index`,
               },
             },
             component: () =>
               import("@/views/admin/siswa/detail/SiswaDetailIndex.vue"),
+          },
+          {
+            path: `${prefix}/siswadetail/:id/penilaian`,
+            name: `${prefixName}siswadetail-penilaian`,
+            meta: {
+              title: "Profile",
+              icon: "mdi-home",
+              breadcrumb: {
+                name: "Penilaian",
+                path: `${prefix}/siswadetail/:id`,
+                goto: `${prefixName}siswadetail-penilaian`,
+              },
+            },
+            component: () =>
+              import("@/views/admin/siswa/detail/SiswaDetailPenilaian.vue"),
           },
         ],
       },

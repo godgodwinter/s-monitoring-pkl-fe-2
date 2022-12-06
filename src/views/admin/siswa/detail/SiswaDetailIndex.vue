@@ -26,7 +26,7 @@ const dataDetail = ref({
 });
 const getDataId = async () => {
     try {
-        const response = await Api.get(`guru/datasiswa/profile/${id}`);
+        const response = await Api.get(`pembimbinglapangan/datasiswa/profile/${id}`);
         // console.log(response.data);
         dataSiswa.value = response.data.siswa;
         tempatpkl.value = response.data.tempatpkl;
