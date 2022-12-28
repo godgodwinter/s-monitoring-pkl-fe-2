@@ -31,15 +31,15 @@ const columns = [
         type: "String",
     },
     {
-        label: "Absensi",
+        label: "Absensi dan Jurnal",
         field: "absensi",
         type: "String",
     },
-    {
-        label: "Jurnal",
-        field: "jurnal",
-        type: "String",
-    },
+    // {
+    //     label: "Jurnal",
+    //     field: "jurnal",
+    //     type: "String",
+    // },
     {
         label: "Telp",
         field: "telp",
@@ -72,6 +72,12 @@ const doEditData = async (id, index) => {
 const doDetailData = async (id, index) => {
     router.push({
         name: "admin-siswadetail-index",
+        params: { id: id },
+    });
+};
+const doAbsensi = async (id, index) => {
+    router.push({
+        name: "admin-siswaabsensi-index",
         params: { id: id },
     });
 };
@@ -176,7 +182,7 @@ const doPenilaianPembimbingLapangan = async (id, index) => {
                     </button>
 
                 </span>
-                <span v-else-if="props.column.field == 'absensi'"> <button
+                <span v-else-if="props.column.field == 'absensi'"> <button @click="doAbsensi(props.row.id, props.index)"
                         class="tooltip text-sky-100 block rounded-md font-bold py-1 px-1 mr-2 flex items-center hover:text-sky-300 bg-sky-400 rounded-lg"
                         data-tip="Detail">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -190,7 +196,7 @@ const doPenilaianPembimbingLapangan = async (id, index) => {
 
                 </span>
                 <span v-else-if="props.column.field == 'jurnal'">
-                    <button
+                    <button @click="doAbsensi(props.row.id, props.index)"
                         class="tooltip text-sky-100 block rounded-md font-bold py-1 px-1 mr-2 flex items-center hover:text-sky-300 bg-sky-400 rounded-lg"
                         data-tip="Detail">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

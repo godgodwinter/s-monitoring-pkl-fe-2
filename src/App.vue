@@ -6,7 +6,7 @@ const storeLanding = useStoreLanding();
 const theme = computed(() => storeLanding.getTheme);
 </script>
 <template>
-  <div :data-theme="theme" class="min-h-screen">
+  <div :data-theme="theme" class="min-h-screen font-dmSans">
     <RouterView />
   </div>
 </template>

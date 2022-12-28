@@ -123,7 +123,7 @@ getDataDetail();
         </router-link>
       </li>
       <span class="py-2 "></span>
-      <label># Acc </label>
+      <!-- <label># Acc </label>
       <li :class="[pagesActive == 'absensi' ? pagesActiveClass : '']">
 
         <router-link :to="{ name: 'admin-siswa' }"> <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -145,7 +145,7 @@ getDataDetail();
 
           <span class="ml-3">Jurnal</span>
         </router-link>
-      </li>
+      </li> -->
       <span class="py-2 "></span>
 
 
