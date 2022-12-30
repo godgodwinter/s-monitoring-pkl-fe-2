@@ -119,6 +119,48 @@ const dataForm = ref({
     jurnalCatatan: null
 });
 
+const doSubmitKonfirmasiAbsensi = async (absensi_id) => {
+    let dataFormInput = {
+        status: dataForm.value.absensiStatus,
+        catatan_pembimbing: dataForm.value.absensiCatatan,
+    };
+    // console.log(dataForm);
+    try {
+        const response = await Api.post(`admin/pkl/absen/konfirmasi/${absensi_id}`, dataFormInput);
+        // console.log(response);
+        // data.id = response.id;
+        Toast.success("Info", "Data berhasil ditambahkan!");
+        // router.push({ name: "admin-penilaian-settings" });
+        getDataAbsensi();
+        dataForm.value.absensiStatus = 'Disetujui';
+        dataForm.value.absensiCatatan = null;
+        return true;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+const doSubmitKonfirmasiJurnal = async (jurnal_id) => {
+    let dataFormInput = {
+        status: dataForm.value.jurnalStatus,
+        catatan_pembimbing: dataForm.value.jurnalCatatan,
+    };
+    // console.log(dataForm);
+    try {
+        const response = await Api.post(`admin/pkl/jurnal/konfirmasi/${jurnal_id}`, dataFormInput);
+        // console.log(response);
+        // data.id = response.id;
+        Toast.success("Info", "Data berhasil ditambahkan!");
+        // router.push({ name: "admin-penilaian-settings" });
+        getDataAbsensi();
+        dataForm.value.jurnalStatus = 'Disetujui';
+        dataForm.value.jurnalCatatan = null;
+        return true;
+    } catch (error) {
+        console.error(error);
+    }
+}
 </script>
 <template>
     <BreadCrumb />
@@ -198,10 +240,10 @@ const dataForm = ref({
         <label :for="item.id" class="modal cursor-pointer">
             <label class="modal-box relative" for="">
                 <h3 class="text-lg font-bold">
-                    CATATAN :
+                    CATATAN : "{{ item.kehadiranStatus }}"
                     <a :href="item.kehadiranBukti" target="_blank" v-if="
-                        item.kehadiran != 'Hadir' && item.kehadiran != null
-                    ">
+    item.kehadiran != 'Hadir' && item.kehadiran != null
+">
                         <span class="btn btn-primary">Download </span></a>
                 </h3>
                 <p class="py-4">
@@ -211,19 +253,28 @@ const dataForm = ref({
                     <!-- <div class="w-full flex justify-end">
                         <button class="btn btn-sm btn-primary" @click="doAbsensiKonfirmasi()">Konfirmasi</button>
                     </div> -->
-                    <hr>
+                    <div class="divider"></div>
 
+                    Catatan Absensi : {{ item.kehadiranCatatanPembimbing }}
+                    <div class="divider"></div>
+                    => "{{ dataForm.absensiStatus ? dataForm.absensiStatus :
+        "Disetujui"
+}}"
+                    <div class="divider"></div>
                     <div class="py-1 flex space-x-2">
-                        <button class="btn btn-sm btn-success" @click="doAbsensiSetujui()">Disetujui</button>
-                        <button class="btn btn-sm btn-error" @click="doAbsensiTolak()">Ditolak</button>
+                        <button class="btn btn-sm btn-success"
+                            @click="dataForm.absensiStatus = 'Disetujui'">Disetujui</button>
+                        <button class="btn btn-sm btn-error"
+                            @click="dataForm.absensiStatus = 'Ditolak'">Ditolak</button>
                     </div>
                     <div>
                         <!-- <input type="text" placeholder="Catatan" class="input input-bordered w-full max-w-xs"/> -->
-                        <input v-model="dataForm.formCatatanKehadiran" type="text" name="formCatatanKehadiran"
-                            ref="formCatatanKehadiran" class="input input-bordered md:w-full max-w-2xl" required />
+                        <input v-model="dataForm.absensiCatatan" type="text" name="absensiCatatan" ref="absensiCatatan"
+                            class="input input-bordered md:w-full max-w-2xl" required />
                     </div>
                     <div class="w-full flex justify-end">
-                        <button class="btn btn-sm btn-info" @click="doAbsensiSimpan()">Simpan</button>
+                        <button class="btn btn-sm btn-info"
+                            @click="doSubmitKonfirmasiAbsensi(item.absensi_id)">Simpan</button>
                     </div>
                 </div>
             </label>
@@ -244,19 +295,29 @@ const dataForm = ref({
                     <!-- <div class="w-full flex justify-end">
                         <button class="btn btn-sm btn-primary" @click="doJurnalKonfirmasi()">Konfirmasi</button>
                     </div> -->
-                    <hr>
+
+                    <div class="divider"></div>
+                    Catatan Jurnal : {{ item.jurnalCatatanPembimbing }}
+
+                    <div class="divider"></div>
+                    => "{{ dataForm.jurnalStatus ? dataForm.jurnalStatus :
+        "Disetujui"
+}}"
+                    <div class="divider"></div>
 
                     <div class="py-1 flex space-x-2">
-                        <button class="btn btn-sm btn-success" @click="doJurnalSetujui()">Disetujui</button>
-                        <button class="btn btn-sm btn-error" @click="doJurnalTolak()">Ditolak</button>
+                        <button class="btn btn-sm btn-success"
+                            @click="dataForm.jurnalStatus = 'Disetujui'">Disetujui</button>
+                        <button class="btn btn-sm btn-error" @click="dataForm.jurnalStatus = 'Ditolak'">Ditolak</button>
                     </div>
                     <div>
                         <!-- <input type="text" placeholder="Catatan" class="input input-bordered w-full max-w-xs" /> -->
-                        <input v-model="dataForm.formCatatanJurnal" type="text" name="formCatatanJurnal"
-                            ref="formCatatanJurnal" class="input input-bordered md:w-full max-w-2xl" required />
+                        <input v-model="dataForm.jurnalCatatan" type="text" name="jurnalCatatan" ref="jurnalCatatan"
+                            class="input input-bordered md:w-full max-w-2xl" required />
                     </div>
                     <div class="w-full flex justify-end">
-                        <button class="btn btn-sm btn-info" @click="doJurnalSimpan()">Simpan</button>
+                        <button class="btn btn-sm btn-info"
+                            @click="doSubmitKonfirmasiJurnal(item.jurnal_id)">Simpan</button>
                     </div>
                 </div>
             </label>
