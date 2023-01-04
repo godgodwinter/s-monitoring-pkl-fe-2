@@ -212,8 +212,8 @@ const doLihatJurnal = () => {
         <div class="lg:flex w-full">
             <div class="w-full lg:w-2/3">
                 <vue-good-table :line-numbers="true" :columns="columns" :rows="penilaian_guru" :search-options="{
-                    enabled: true,
-                }" :pagination-options="{
+    enabled: true,
+}" :pagination-options="{
     enabled: true,
     perPageDropdown: [10, 20, 50],
 }" styleClass="vgt-table striped bordered condensed" class="py-0">
