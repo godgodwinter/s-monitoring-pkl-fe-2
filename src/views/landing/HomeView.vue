@@ -25,9 +25,22 @@ const onSubmit = async () => {
     </div>
     <div class="hero h-96 bg-base-100">
         <div class="hero-content flex-col lg:flex-row-reverse">
-            <div class="text-center lg:text-left">
+            <!-- <div class="text-center lg:text-left">
                 <h1 class="text-5xl font-bold">Login </h1>
                 <p class="py-6">Masuk Sebagai Guru.</p>
+            </div> -->
+
+            <div class="text-center lg:text-left">
+
+                <div class="w-full flex justify-center">
+                    <div class="avatar">
+                        <div class="w-24 rounded">
+                            <img src="@/assets/logo_smk.png" />
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-5xl font-bold text-center"> SISTEM INFORMASI PRAKERIN </h1>
+                <p class="py-6 text-center">Masuk Sebagai Pembimbing Lapangan.</p>
             </div>
             <div class="cards w-full max-w-sm shadow-2xl bg-base-100 ">
                 <div class="card-body  flex justify-center ">
